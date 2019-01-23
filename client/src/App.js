@@ -5,16 +5,22 @@ import axios from 'axios'
 
 class App extends Component {
   state = {
-    persons: []
+    data: []
   }
 
   componentDidMount() {
     axios.get(`http://localhost:5000`)
       .then(res => {
         console.log(res);
-        const persons = res.data;
-        this.setState({ persons });
+        const data = res.data;
+        this.setState({ data });
       })
+  }
+
+  renderData = () => {
+    if (this.state.data.length > 0) {
+      return this.state.data.map(item => item.id)
+    }
   }
 
   render() {
@@ -25,6 +31,7 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          {this.renderData()}
           <a
             className="App-link"
             href="https://reactjs.org"
