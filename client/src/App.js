@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios'
 import FirstItem from './components/FirstItem'
 import SecondItem from './components/SecondItem'
@@ -32,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000`)
+    axios.get(`/`)
       .then(res => {
         const data = res.data;
         this.setState({ data });
