@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
+import FirstItem from './components/FirstItem'
+import SecondItem from './components/SecondItem'
+import ThirdItem from './components/ThirdItem'
+import FourthItem from './components/FourthItem'
 
 class App extends Component {
   state = {
@@ -19,28 +22,26 @@ class App extends Component {
 
   renderData = () => {
     if (this.state.data.length > 0) {
-      return this.state.data.map(item => item.id)
+      return this.state.data.map(item => {
+        if (item.id === 1) {
+          return <FirstItem item={item} />
+        } else if (item.id < 5) {
+          return <SecondItem item={item} key={item.id} />          
+        } else if (item.id < 10) {
+          return <ThirdItem item={item} key={item.id} />          
+        } else if (item.id < 16) {
+          return <FourthItem item={item} key={item.id} />          
+        } else {
+          return null
+        }
+      })
     }
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          {this.renderData()}
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.renderData()}
       </div>
     );
   }
