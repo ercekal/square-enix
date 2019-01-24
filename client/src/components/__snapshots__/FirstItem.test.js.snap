@@ -12,7 +12,7 @@ exports[`renders correctly 1`] = `
   <h1
     className="sc-bwzfXH cIUGvj"
   >
-    Lorem Ipsum 
+    Lorem Ipsum
   </h1>
   <p
     className="sc-htpNat kzIIDb"
