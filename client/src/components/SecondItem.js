@@ -4,6 +4,13 @@ import styled from 'styled-components'
 const Div = styled.div`
   display: flex;
 	flex-direction: column;
+  width: 32%;
+  @media (max-width: 800px) {
+    width: 48%;
+  }
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 `
 const H1 = styled.h1`
   padding-left: 10px;
@@ -14,16 +21,16 @@ const P = styled.p`
   text-align: left;
 `
 const IMG = styled.img`
-  height: 400px;
+  height: 250px;
 `
 
-export default function SecondItem({item: {id, artwork, title, content}}) {
-	console.log(id, artwork, title, content);
+export default function SecondItem({item: {id, artwork, title, content}, size}) {
+	console.log(id, artwork, title, content, size);
 	
   return (
-    <Div>
+    <Div size={size}>
       <IMG src={artwork} alt={id}/>
-      <H1>Lorem Ipsum Second</H1>
+      <H1>Lorem Ipsum {size}</H1>
       <P>{content.substring(0, 180)}</P>
     </Div>
   )

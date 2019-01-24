@@ -4,8 +4,12 @@ import styled from 'styled-components'
 const Div = styled.div`
   display: flex;
 	flex-direction: column;
+  width: 16%;
+  @media (max-width: 800px) {
+    width: 32%;
+  }
   @media (max-width: 400px) {
-    width: 49%;
+    width: 45%;
   }
 `
 const H1 = styled.h1`
@@ -17,17 +21,15 @@ const P = styled.p`
   text-align: left;
 `
 const IMG = styled.img`
-  height: 400px;
+  height: 150px;
 `
 
 export default function FourthItem({item: {id, artwork, title, content}}) {
-	console.log(id, artwork, title, content);
-	
   return (
     <Div>
       <IMG src={artwork} alt={id}/>
-      <H1>Lorem Ipsum Fourth</H1>
-      <P>{content.substring(0, 180)}</P>
+      <H1>Lorem Ipsum</H1>
+      <P>{content.substring(0, 70)}</P>
     </Div>
   )
 }
