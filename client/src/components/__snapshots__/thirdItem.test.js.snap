@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-bdVaJa fOuysa"
+>
+  <img
+    alt={7}
+    className="sc-bxivhb cTwwZm"
+    src="https://placehold.it/1920x1080"
+  />
+  <h1
+    className="sc-bwzfXH cIUGvj"
+  >
+    Lorem Ipsum 
+  </h1>
+  <p
+    className="sc-htpNat kzIIDb"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
+  </p>
+</div>
+`;

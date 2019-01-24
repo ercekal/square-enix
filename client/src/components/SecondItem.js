@@ -31,7 +31,7 @@ export default function SecondItem({item: {id, artwork, title, content}, size}) 
     <Div size={size}>
       <IMG src={artwork} alt={id}/>
       <H1>Lorem Ipsum {size}</H1>
-      <P>{content.substring(0, 180)}</P>
+      <P>{content.substring(0, 150)}</P>
     </Div>
   )
 }
