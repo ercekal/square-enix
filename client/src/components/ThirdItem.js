@@ -23,13 +23,11 @@ const IMG = styled.img`
   height: 200px;
 `
 
-export default function ThirdItem({item: {id, artwork, title, content}, size}) {
-	console.log(id, artwork, title, content, size);
-	
+export default function ThirdItem({item: {id, artwork, title, content}}) {
   return (
-    <Div size={size}>
+    <Div>
       <IMG src={artwork} alt={id}/>
-      <H1>Lorem Ipsum {size}</H1>
+      <H1>Lorem Ipsum</H1>
       <P>{content.substring(0, 100)}</P>
     </Div>
   )

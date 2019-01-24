@@ -21,11 +21,11 @@ const IMG = styled.img`
   height: 400px;
 `
 
-export default function FirstItem({item: {id, artwork, title, content}, size}) {
+export default function FirstItem({item: {id, artwork, title, content}}) {
   return (
-    <Div size={size}>
+    <Div>
       <IMG src={artwork} alt={id}/>
-      <H1>Lorem Ipsum {size}</H1>
+      <H1>Lorem Ipsum</H1>
       <P>{content.substring(0, 180)}</P>
     </Div>
   )

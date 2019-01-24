@@ -5,6 +5,7 @@ import SecondItem from './components/SecondItem'
 import ThirdItem from './components/ThirdItem'
 import FourthItem from './components/FourthItem'
 import styled from 'styled-components'
+import Lightbox from 'react-image-lightbox';
 
 const FourthDiv = styled.div`
   display: flex;
@@ -27,26 +28,30 @@ const FirstAndSecondDiv = styled.div`
 `
 class App extends Component {
   state = {
-    data: []
+    data: [],
+    photoIndex: -1,
+    isOpen: true
   }
 
   componentDidMount() {
-    axios.get(`/`)
-      .then(res => {
-        const data = res.data;
-        this.setState({ data });
-      })
+    axios.get(`http://localhost:5000/`)
+    .then(res => {
+      const data = res.data;
+      let images = []
+      data.map(item =>  images.push(item.artwork))
+      this.setState({ data, images });
+    })
   }
 
   renderFirstAndSecond = () => {
     if (this.state.data.length > 0) {
       return (
         <FirstAndSecondDiv>
-          {this.state.data.slice(1, 6).map((item, i) => {
-            if(i === 0) {
-              return <FirstItem item={item} key={item.id} size={1} />
+          {this.state.data.slice(0, 5).map((item, i) => {
+            if (i === 0) {
+              return <FirstItem item={item} key={item.id} onClick={() => this.openLightbox(i)}/>
             }
-            return <SecondItem item={item} key={item.id} size={2} />
+            return <SecondItem item={item} key={item.id} onClick={() => this.openLightbox(i)} />
           })}
         </FirstAndSecondDiv>
       )
@@ -56,7 +61,7 @@ class App extends Component {
     if (this.state.data.length > 0) {
       return (
         <ThirdDiv>
-          {this.state.data.slice(6, 10).map(item => <ThirdItem item={item} key={item.id} size={3} />)}
+          {this.state.data.slice(6, 10).map((item, i) => <ThirdItem item={item} key={item.id} onClick={() => this.openLightbox(i)} />)}
         </ThirdDiv>
       )
     }
@@ -65,10 +70,41 @@ class App extends Component {
     if (this.state.data.length > 0) {
       return (
         <FourthDiv>
-          {this.state.data.slice(10, 16).map(item => <FourthItem item={item} key={item.id} size={4} />)}
+          {this.state.data.slice(10, 16).map((item, i) => <FourthItem item={item} key={item.id} onClick={() => this.openLightbox(i)}  />)}
         </FourthDiv>
       )
     }    
+  }
+
+  openLightbox = (id) => {
+    this.setState({
+      photoIndex: id,
+      isOpen: true
+    })
+  }
+
+  showLightbox = () => {
+    const {isOpen, images} = this.state
+    const photoIndex = 2
+    if (isOpen && images && images.length > 0) {
+      return <Lightbox
+      mainSrc={images[photoIndex]}
+      nextSrc={images[(photoIndex + 1) % images.length]}
+      prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+      imageTitle={photoIndex + 1 + "/" + images.length}
+      onCloseRequest={() => this.setState({ isOpen: false })}
+      onMovePrevRequest={() =>
+        this.setState({
+          photoIndex: (photoIndex + images.length - 1) % images.length
+        })
+      }
+      onMoveNextRequest={() =>
+        this.setState({
+          photoIndex: (photoIndex + 1) % images.length
+        })
+        }
+      />
+    }
   }
 
   render() {
@@ -77,6 +113,7 @@ class App extends Component {
         {this.renderFirstAndSecond()}
         {this.renderThird()}
         {this.renderFourth()}
+        {/* {this.showLightbox()} */}
       </div>
     );
   }
